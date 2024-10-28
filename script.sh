@@ -1,10 +1,14 @@
 #! /bin/sh
-
-#verification nombre de parametres
-if [ $# -ne 1 ]
+#vérification nombre de paramètres
+if [ $# -eq 0 ]
 then
-	echo "Usage : ./script.sh <ville>"
-	exit 1
+    ville="Toulouse"
+elif [ $# -ne 1 ]
+then
+    echo "Usage : ./scriptv2.sh <Ville>"
+    exit 1
+else
+    ville=$1
 fi
 
 #récuperation parametres ville 
