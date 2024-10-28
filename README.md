@@ -16,11 +16,9 @@ Ce projet propose un script Shell qui extrait périodiquement la température ac
   4. Enregistrer les informations au format `[Date] - [Heure] - Ville : [Température actuelle] - [Prévision du lendemain]` dans un fichier `meteo.txt`.
 - **Exemple** :
 
-<<<<<<< HEAD
-./meteo.sh Toulouse
+./script.sh Toulouse
+cat meteo.txt
 2024-10-28 - 15:38 - Toulouse : 17°C - 17°C
-=======
->>>>>>> v2
 
 ### Version 2 : Automatisation périodique
 
@@ -48,3 +46,4 @@ Ce projet propose un script Shell qui extrait périodiquement la température ac
 
 ```bash
 ./Extracteur_Météo.sh [ville]
+
