@@ -22,4 +22,11 @@ fi
 
 #récupération température du lendemain
 templen=$(head -n 103 local.txt | tail -n 1 | grep -oE "\-*[0-9]*")°C
+
+#meteo en une ligne
+heure=$(date +"%H:%M")
+date=$(date +"%Y-%m-%d")
+meteo="$date - $heure - $ville : $tempact - $templen"
+echo $meteo > meteo.txt
+
 exit 0 
