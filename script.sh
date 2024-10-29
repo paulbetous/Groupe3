@@ -6,7 +6,7 @@ then
     ville="Toulouse"
 elif [ $# -ne 1 ]
 then
-    echo "Usage : ./script.sh <Ville>
+    echo "Usage : ./script.sh <Ville>"
     exit 1
 else
     ville=$1
@@ -46,4 +46,9 @@ datefichier=$(date +"%Y%m%d")
 fichier="meteo_$datefichier.txt"
 echo $meteo >> $fichier
 
-exit 0 
+#enregistrement dans un fichier json (écrasé à chaque nouvel enregistrement)
+fichierjson="meteo_$datefichier.json"
+saisie="{\n \"date\": \"$date\",\n \"heure\": \"$heure\",\n \"ville\": \"$ville\",\n \"température\": \"$tempact\",\n \"vent\": \"$vent\",\n \"humidité\": \"$humidite\",\n \"visibilité\": \"$visibilite\"\n}"
+echo -e $saisie > $fichierjson
+
+exit 0
