@@ -41,7 +41,7 @@ date=$(date +"%Y-%m-%d")
 ###modification de la mise en forme méteo car on rajoute plus d'inforamation###
 meteo="$date - $heure - $ville : Température actuelle : $tempact, Prévision du lendemain : $templen, Vent : $vent, Humidité : $humidite, Visibilité : $visibilite"
 
-#MODIF V3 !
+#enregistrement dans un fichier journalier
 datefichier=$(date +"%Y%m%d")
 fichier="meteo_$datefichier.txt"
 echo $meteo >> $fichier
