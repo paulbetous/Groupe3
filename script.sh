@@ -33,4 +33,9 @@ date=$(date +"%Y-%m-%d")
 meteo="$date - $heure - $ville : $tempact - $templen"
 echo $meteo > meteo.txt
 
+#enregistrement dans un fichier journalier
+datefichier=$(date +"%Y%m%d")
+fichier="meteo_$datefichier.txt"
+echo $meteo >> $fichier
+
 exit 0 
