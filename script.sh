@@ -14,9 +14,20 @@ fi
 
 #exportation données brutes dans fichier .txt
 curl -s wttr.in/$ville?format=j2 > local.txt
+if [ $? -ne 0 ]
+then
+    echo "$(date +"%Y-%m-%d %H:%M:%S") - Erreur de connexion à wttr.in pour $ville lors de l'exportation des données brutes" >> meteo_error.log
+    exit 1
+fi
 
 #récupération température actuelle
 tempact=$(curl -s wttr.in/$ville?format="%t")
+if [ $? -ne 0 ]
+then
+    echo "$(date +"%Y-%m-%d %H:%M:%S") - Erreur de connexion à wttr.in pour $ville lors de la récupération de la température actuelle" >> meteo_error.log
+    exit 1
+fi
+
 if [ "${tempact:0:1}" = "+" ]
 then
     tempact=$(echo $tempact | cut -c 2-)
@@ -27,9 +38,19 @@ templen=$(head -n 103 local.txt | tail -n 1 | grep -oE "\-*[0-9]*")°C
 
 #récupération de la vitesse du vent
 vent=$(curl -s wttr.in/$ville?format="%w")
+if [ $? -ne 0 ]
+then
+    echo "$(date +"%Y-%m-%d %H:%M:%S") - Erreur de connexion à wttr.in pour $ville lors de la récupération de la vitesse du vent" >> meteo_error.log
+    exit 1
+fi
 
 #récupération du taux d'humidité
 humidite=$(curl -s wttr.in/$ville?format="%h")
+if [ $? -ne 0 ]
+then
+    echo "$(date +"%Y-%m-%d %H:%M:%S") - Erreur de connexion à wttr.in pour $ville lors de la récupération de l'humidité" >> meteo_error.log
+    exit 1
+fi
 
 #récuperation de la visibilite
 visibilite=$(head -n 17 local.txt | tail -n 1 | grep -oE "[0-9]*")
