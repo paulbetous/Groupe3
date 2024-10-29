@@ -1,16 +1,18 @@
 #! /bin/sh
 
-#verification nombre de parametres
-if [ $# -ne 1 ]
+#vérification nombre de paramètres
+if [ $# -eq 0 ]
 then
-	echo "Usage : ./script.sh <ville>"
-	exit 1
+    ville="Toulouse"
+elif [ $# -ne 1 ]
+then
+    echo "Usage : ./scriptv3.sh <Ville>"
+    exit 1
+else
+    ville=$1
 fi
 
-#récuperation parametres ville 
-ville=$1
-
-#exportation données brutes dans fichier.txt
+#exportation données brutes dans fichier .txt
 curl -s wttr.in/$ville?format=j2 > local.txt
 
 #récupération température actuelle
@@ -23,10 +25,25 @@ fi
 #récupération température du lendemain
 templen=$(head -n 103 local.txt | tail -n 1 | grep -oE "\-*[0-9]*")°C
 
+#récupération de la vitesse du vent
+vent=$(curl -s wttr.in/$ville?format="%w")
+
+#récupération du taux d'humidité
+humidite=$(curl -s wttr.in/$ville?format="%h")
+
+#récuperation de la visibilite
+visibilite=$(head -n 17 local.txt | tail -n 1 | grep -oE "[0-9]*")
+
 #meteo en une ligne
 heure=$(date +"%H:%M")
 date=$(date +"%Y-%m-%d")
-meteo="$date - $heure - $ville : $tempact - $templen"
-echo $meteo > meteo.txt
 
-exit 0 
+###modification de la mise en forme méteo car on rajoute plus d'inforamation###
+meteo="$date - $heure - $ville : Température actuelle : $tempact, Prévision du lendemain : $templen, Vent : $vent, Humidité : $humidite, Visibilité : $visibilite"
+
+#MODIF V3 !
+datefichier=$(date +"%Y%m%d")
+fichier="meteo_$datefichier.txt"
+echo $meteo >> $fichier
+
+exit 0
