@@ -1,19 +1,12 @@
 #! /bin/sh
-<<<<<<< HEAD
-=======
 
->>>>>>> vs1
 #vérification nombre de paramètres
 if [ $# -eq 0 ]
 then
     ville="Toulouse"
 elif [ $# -ne 1 ]
 then
-<<<<<<< HEAD
-    echo "Usage : ./scriptv2.sh <Ville>"
-=======
-    echo "Usage : ./scriptv3.sh <Ville>"
->>>>>>> vs1
+    echo "Usage : ./script.sh <Ville>
     exit 1
 else
     ville=$1
@@ -45,19 +38,12 @@ visibilite=$(head -n 17 local.txt | tail -n 1 | grep -oE "[0-9]*")
 heure=$(date +"%H:%M")
 date=$(date +"%Y-%m-%d")
 
-<<<<<<< HEAD
-=======
-###modification de la mise en forme méteo car on rajoute plus d'inforamation###
+###modification de la mise en forme méteo car on rajoute plus d'informations ###
 meteo="$date - $heure - $ville : Température actuelle : $tempact, Prévision du lendemain : $templen, Vent : $vent, Humidité : $humidite, Visibilité : $visibilite"
 
->>>>>>> vs1
 #enregistrement dans un fichier journalier
 datefichier=$(date +"%Y%m%d")
 fichier="meteo_$datefichier.txt"
 echo $meteo >> $fichier
 
-<<<<<<< HEAD
 exit 0 
-=======
-exit 0
->>>>>>> vs1
